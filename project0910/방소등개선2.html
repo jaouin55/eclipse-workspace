@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#wrapper{
+    width:800px;
+    height:600px;
+    background:red;
+    margin:auto;
+    position:relative;
+}
+/* wrapper 자식인 code , content를 부모 기준으로 배치할것임 */
+#code{
+    width:100px;
+    height:100%;
+    position:absolute;
+    left:0px;
+    top:0px;
+    background:#dfdfdf;
+}
+#content{
+    width:700px;
+    height:100%;
+    position:absolute;
+    left:100px;
+    top:0px;
+    background:green;
+}
+#mask{
+    width:700px;
+    height:600px;
+    background:black;
+    opacity: 0.8;
+    left:100px;
+    top:0px;
+    position:absolute;
+}
+img{
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+</style>
+</head>
+<script>
+    var status; //on or off를 결정할 변수
+    var flagSwitch=true; //스위치의 상태를 결정짓는 변수 true/false
+    var op;
+    var opSwitch=true;
+function turn(){
+    status = (flagSwitch) ? "on" : "off" ;
+    document.getElementById("pic").src="../img/switch_"+status+".png";
+    flagSwitch= !flagSwitch; //논리값 뒤집기!!
+
+    // 아래에 투명도를 제어해보자 (who? mask라는 id를 갖는)
+    // 0은 불투명 1은 투명 (0은 on , 1은 off)
+
+    op=(opSwitch) ? "0" : "0.8" ;
+    document.getElementById("mask").style.opacity=op;
+    opSwitch= !opSwitch;//논리값 뒤집기!!
+
+}
+
+
+
+</script>
+<body>
+
+    <div id="wrapper">
+        <div id="code"></div>
+            <img id="pic" src="../img/switch_off.png" onClick="turn()"/>
+        <div id="content">
+            <img src="../img/room.jpg" width="700px" height="600px"></div>
+            <div id="mask"></div>
+        </div>
+            <!-- mask와 img는 content라는 부모를 두고 위치를 결정 : position:absoulute -->
+    </div>
+    
+</body>
+</html>

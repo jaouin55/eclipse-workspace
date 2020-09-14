@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:rgb(128, 127, 190);
+    margin:auto;
+    font-size: 50px;
+    text-align:center; /*div안쪽 컨텐츠 정렬*/
+}
+
+</style>
+<script>
+//버튼을 누를때마다 , 1씩 증가시키되 3마다 div안 컨텐츠에 숫자 대신 원하는 단어를 출력하자.
+var n = 0;
+var msg;
+function setCount(){
+    n++; //1증가
+    
+    msg=(n%3==0) ? "박수" : n;
+
+    document.getElementById("box").innerText=msg;
+    //innerText = div사이에 있는 컨텐츠 의미
+
+
+}
+
+
+
+</script>
+
+</head>
+<body>
+
+    <button onClick="setCount()">카운터 증가</button>
+    <div id="box">0</div>
+</body>
+</html>

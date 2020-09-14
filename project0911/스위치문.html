@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+    var bg= parseInt(prompt("색상을 선택하세요"));
+    //parseInt = 정수화시키는것.
+    //원래 프롬포트에 5라고 작성하면 얘는 "5"라고 해석이 되기때문에
+    //저걸 빼면 문자열취급이기때문에 숫자를 입력해도 안돌아간다.
+    //그러므로 입력한 문자(쌍따음표"")를 걷어내야 한다.
+    //그러기때문에 문자를 숫자로 변환값을 바꿀 parsenInt를 쓴다.
+    //  parseInt("숫자화시키고싶은 대상 문자")    
+
+    
+    document.write("당신이 입력한 숫자는 "+bg);
+    //무려 7개이상이 되므로 ,  else if 문을 써야하지만, 
+    //코드의 단순화 및 식별성을 위해 같은 목적이지만 좀더 줄여쓰는 swith문
+    //swith(판단대상 데이터)
+    //case 의 조건이 참이 되면 , break를 꼭 작성해야한다.
+
+    switch(bg){ //1~7까지를 대상으로 case by case 를 따져서 수행 
+        case 1:document.body.style.background="red"; break;
+        case 2:document.body.style.background="orange"; break;
+        case 3:document.body.style.background="yellow"; break;
+        case 4:document.body.style.background="green"; break;
+        case 5:document.body.style.background="blue"; break;
+        case 6:document.body.style.background="navy"; break;
+        case 7:document.body.style.background="purple"; break;
+
+        //case에 지정하지 않은 모든 ~데이터에 대한 처리
+        default:alert("사용법을 제대로 알고 하세요!");
+
+    }
+</script>    
+    
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- 0 도달하면 증가 , 400증가하면 감소 (left값) -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:red;
+    position:absolute;
+    left:0px;
+    top:200px;
+
+}
+
+</style>
+<script>
+    /*var step=5;
+    var noo=5;
+ function move(){
+    document.getElementById("box").style.left=step+"px";*/
+    
+
+
+        var x = 10;
+        var step = 10;
+   
+        function move(){
+      
+        document.getElementById("box").style.left=x+"px";
+          x+=step;
+          step=(x>400 || x<0) ? -step : step;
+        document.getElementById("info").value=x;
+}
+
+
+</script>
+</head>
+
+<body>
+
+    <button onClick="move()">움직이기</button>
+    <input type = "text" id="info"/>
+        <div id="box"></div>
+
+</body>
+</html>
