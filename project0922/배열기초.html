@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+/*좋아하는 과일명을 10개정도 올리자.
+var a1 = "샤인머스켓";
+var a2 = "아오리사과";
+var a3 ="포도";
+var a4 = "바나나";
+var a5 = "복숭아";
+var a6 = "귤";
+var a7 = "레몬";
+var a8 = "라임";
+var a9 = "자몽";
+var a10 = "수박";
+
+//메모리에 올려진 데이터를 출력해보자.
+document.write();*/
+var arr = new Array(10); //배열선언[] [] [] [] [] [] [] [] [] []  (10개빈공간)
+arr[0]="아오리사과";
+arr[1]="샤인머스켓";
+arr[2]="포도";
+arr[3]="바나나";
+arr[4]="복숭아";
+arr[5]="귤";
+arr[6]="레몬";
+arr[7]="라임";
+arr[8]="자몽";
+arr[9]="수박";
+
+//모든 과일을 찍어보자
+for(var i=0 ; i<=9 ; i++){
+    document.write(arr[i]);
+}
+//일반적인 언어에서는 배열 선언시 반드시 크기를 명시해야 하지만
+//자바스크립트는 배열의 크기를 명시하지 않아도 되며, 이경우 자동으로
+//늘어난다.
+
+var word= new Array(7);//크기명시 (단, 초기의 크기를 의미)
+
+word[0]="마우스";
+word[1]="광화문";
+word[2]="모니터";
+word[3]="지하철";
+word[4]="하늘";
+word[5]="짜장면";
+word[6]="두루마리";
+
+document.write(word.length);//배열의 길이를 담는 변수
+
+//모든 데이터를 출력하시오
+for(var i=0; i<word.length; i++){
+    document.write(word[i]);
+}
+
+// var word2=new  Array();//크기를 명시하지 않음
+// word2[0]="강아지";
+// word2[1]="고양이";
+// word2[3]="돼지"
+
+
+//10. (2)
+
+</script>   
+</head>
+<body>
+
+</body>
+</html>

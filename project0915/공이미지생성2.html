@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+
+
+<!-- prompt를 대입해서 원하는 순번으로 공 바꾸기 -->
+
+
+<script>
+
+    var n = prompt("몇번쨰마다 다른공을 생성할래요?");
+    //5를 입력해도 프롬포트 특성상 문자 "5"로 이해한다
+    //따라서 숫자로 바꾸러면 parseInt()해주자
+    n = parseInt(n); // "5" 쌍따옴표 제거 ==>5 정수
+
+    var count=0; //전역변수(숫자를 누적시켜야하기때문)
+    //count++을 여기서 생성시키면 계속 1이기떄문에 안됨
+
+function createBall(){
+    count++;//여기서 생성시켜야 계속 증가
+    console.log("count is " , count);//console에 카운트 증가를 보기위해
+    
+    var ball = document.createElement("img");//<img/>작성 동일
+   
+   if(count%n!=0){
+    ball.src = "../img/ball1.png"; //<img src="주소"/>작성 동일
+   }
+   if(count%n==0 ){
+    ball.src = "../img/ball2.png"; 
+   }
+    
+    
+    ball.style.width=50+"px";
+    document.body.appendChild(ball);//body에 ball 추가
+
+
+
+
+    }
+   
+</script>
+</head>
+
+<body>
+    <button onClick="createBall()">공 생성</button>
+</body>
+</html>

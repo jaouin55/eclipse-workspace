@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+var arrow;
+var stepX=10;
+
+function createArrow(){
+    arrow = document.createElement("span");
+    arrow.innerText="▶";
+    arrow.style.position="absolute";
+    arrow.style.left=0+"px";
+    arrow.style.top=100+"px";
+    arrow.style.color="red";
+    arrow.style.fontSize="30px";
+
+    document.body.appendChild(arrow);
+}
+/*동작 처리 함수*/
+function move(){
+    arrow.style.left=parseInt(arrow.style.left)+stepX+"px";
+}
+
+function init(){
+    createArrow();
+    setInterval("move()",10);
+}
+
+window.addEventListener("load",function(){
+    init();
+});
+
+</script>
+</head>
+<body>
+</body>
+</html>

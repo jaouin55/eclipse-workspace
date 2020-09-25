@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrapper{
+    width:600px;
+    height:300px;
+    background:wheat;
+    margin:auto;
+    position:relative;
+}
+input[type='text']{
+    width:20%;
+    height:100px;
+    font-size:80px;
+    text-align: right;
+}
+.Start{
+    width:80px;
+    height:50px;
+    background:orchid;
+    border:2px solid darkblue;
+    position: absolute;
+    left:160px;
+    top:220px;
+}
+.Pause{
+    width:80px;
+    height:50px;
+    background:orchid;
+    border:2px solid darkblue;
+    position: absolute;
+    left:260px;
+    top:220px;
+}
+.Reset{
+    width:80px;
+    height:50px;
+    background:orchid;
+    border:2px solid darkblue;
+    position: absolute;
+    left:360px;
+    top:220px;
+}
+</style>
+<script>
+var hour;
+var min;
+var sec;
+var hh=0;
+var mm=0;
+var ss=0;
+var st;
+var start;
+var pause;
+var reset;
+var flag=true;
+
+function init(){
+    hour = document.getElementById("hour")
+    min = document.getElementById("min")
+    sec = document.getElementById("sec")
+    start = document.getElementById("start");
+    pause = document.getElementById("pause");
+    reset = document.getElementById("reset");
+    hour.value=hh;
+    min.value=mm;
+    sec.value=ss;
+
+}
+
+window.addEventListener("load" , function(){
+    init();
+});
+
+start.addEventListener("click", function(){
+    auto();
+ });
+pause.addEventListener("click", function(){
+ flag=!flag;
+    if(!flag){
+        this.innerText="▶";
+    }else{
+        this.innerText="Pause";
+    }
+ });
+reset.addEventListener("click", function(){
+    clearTimeout(st);
+        ss=0;
+        mm=0;
+        hh=0;
+        sec.value=ss;
+        min.value=mm;
+        hour.value=hh;
+        flag=true;
+});
+
+function auto(){
+    st=setInterval("timer()",1000);
+}
+
+function timer(){
+    if(flag){ 
+        ss++;
+        if(ss >=60){
+            mm++;
+            ss=0;        
+        }
+        if(mm >=60){
+            hh++;
+            mm=0;
+        }
+        hour.value=hh;
+        min.value=mm;
+        sec.value=ss; 
+    }
+}
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <input type="text" id="hour"/>
+        <input type="text" id="min"/>
+        <input type="text" id="sec"/>
+        <button class="Start" >Start</button>
+        <button class="Pause" >Pause</button>
+        <button class="Reset" >Reset</button>
+    </div>
+</body>
+</html>

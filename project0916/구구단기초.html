@@ -1,0 +1,19 @@
+<script>
+/*
+구구단이건 상관없이 반복문에서 가장 중요한건
+반복횟수다..왜? 횟수를 이용하여 반복문 수행 후 규칙은 변하는것만
+관활하고 , 변수로 대체하면 된다.
+*/
+
+
+var n = parseInt(prompt("원하는 단수를 입력하세요."));
+
+for(var i=1; i<=n; n--){
+    document.write("==\t"+n+"단\t=="+"<br/>");
+        for(var a=1; a<=9; a++){
+            document.write(n+"*"+a+"="+n*a+"<br/>");
+    }
+}
+
+    
+</script>

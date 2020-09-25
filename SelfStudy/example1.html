@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0px;
+}
+#wrapper{
+    width:100%;
+    height:1000px;
+    background:oldlace;
+    margin:auto;
+}
+#nav{
+    width:100%;
+    height:100px;
+    background:silver;
+    border-bottom:1px solid black;
+    position: relative;
+    display : flex;
+    align-items:center;
+}
+#nav_center{
+    margin:auto;
+    display:flex; /*메뉴글자들이 세로가아닌 가로로 정렬*/
+    align-items:center; /*메뉴글자들이 nav 안쪽 가운데 정렬*/
+}
+#navItem{
+    font-size : 17px;
+    color:black;
+    widows: 80px;
+    height:25px;
+    background:sliver;
+    border-radius: 25px;
+    padding-left:20px;
+    padding-right:20px;
+    margin-left:10px;
+    margin-right:10px;
+}
+#navItem1{
+    font-size:40px;
+    color:yellow;
+    width:150px;
+    height:30px;
+    padding-bottom:35px;
+    margin-left:50px;
+}
+#navItem2{
+    font-size:15px;
+    width:80px;
+    height:25px;
+    padding-left:50px;
+}
+
+#navItem3{
+    font-size:15px;
+    width:80px;
+    height:25px;  
+}
+
+#mainPic{
+    width:100%;
+    height:900px;
+    margin:auto;
+    background-image: url("../img/kakao.png");
+    background-repeat:no-repeat; /*이미지 한개만출력*/
+    background-size: 100% 900px; /*이미지 사이즈*/
+}
+
+
+</style>
+<script>
+
+
+
+</script>
+<body>
+<div id="wrapper">
+    <div id="nav">
+        <div id="navItem1">kakao</div>
+        <div id="nav_center">
+        <div id="navItem">카카오</div>
+        <div id="navItem">투자정보</div>
+        <div id="navItem">서비스</div>
+        <div id="navItem">소셜임팩트</div>
+        <div id="navItem">고객지원</div>
+        <div id="navItem">인재영입</div>
+    </div>
+    <div id="navItem2">KOR</div>
+    <div id="navItem3">ENG</div>
+    </div>
+    <div id="mainPic"></div>    
+   
+
+
+
+</div>
+
+
+
+
+</body>
+</html>

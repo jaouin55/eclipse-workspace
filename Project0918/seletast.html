@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0px;
+}
+input{
+    width:200px;
+    height:30px;
+    margin:10px;
+}
+#wrapper{
+    width:100%;
+    height:800px;
+    border:1px solid black;
+}
+#box{
+    width:100%;
+    height:1000px;
+    background:white;
+    position:relative;
+}
+</style>
+<script>
+   var x,y;
+    var wrapper;
+    var box;
+    var content;
+    var a = 0.1;
+    let targetX, targetY;
+
+    window.addEventListener("load", function(){
+        wrapper = document.getElementById("wrapper");
+        box = document.getElementById("box");
+        x = document.querySelector("#x");
+        y = document.querySelector("#y");
+        createContent();
+        setInterval("move2();", 10)
+        auto();
+    });
+    function createContent(){
+        content = document.createElement("div");
+        content.style.width=50+"px";
+        content.style.height=50+"px";
+        content.style.background="pink";
+        content.style.left=30+"px";
+        content.style.top=30+"px";
+        content.style.borderRadius=50+"px";
+        content.style.position="absolute";
+        box.appendChild(content);
+    }
+    function move(){
+        targetX = parseInt(x.value);
+        targetY = parseInt(y.value);
+        //console.log("x의 좌표는",x.value);
+        //console.log("y의 좌표는",y.value);
+    }
+    function move2(){
+        tempX = parseInt(content.style.left)+a*(parseInt(targetX)-parseInt(content.style.left))
+        tempY = parseInt(content.style.top)+a*(parseInt(targetY)-parseInt(content.style.top))
+        content.style.left = tempX + "px";
+        content.style.top = tempY + "px";
+    }
+    function auto(){
+        setInterval("createContent()",100);
+    }
+
+</script>
+</head>
+<body>
+    <div id="wrapper">
+    </br>
+        <input id="x" type="text" value="10" placeholder="이동할 x좌표" maxlength="3"/>
+        <input id="y" type="text" value="20" placeholder="이동할 y좌표" maxlength="3"/>
+            <button onClick="move()">실행</button>
+            <div id="box">
+            </div>
+    </div>
+</body>
+</html>

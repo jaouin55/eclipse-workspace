@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0px;
+}
+input{
+    width:200px;
+    height:30px;
+    margin:10px;
+}
+#wrapper{
+    width:100%;
+    height:800px;
+    border:1px solid black;
+}
+#box{
+    width:100%;
+    height:700px;
+    background:white;
+    position:relative;
+}
+</style>
+<script>
+    var x=0;
+    var y=0;
+    var targetX=0;
+    var targetY=0;
+    //var a=1;
+
+    var wrapper;
+    var box;
+    var content;
+
+ window.addEventListener("load", function(){
+    wrapper = document.getElementById("wrapper");
+    box = document.getElementById("box");
+    x = document.querySelector("input[name=x]");
+    y = document.querySelector("input[name=y]");
+    createContent();
+    move();
+    //setInterval("move()",20)
+});
+function createContent(){
+    content = document.createElement("div");
+    content.style.width=50+"px";
+    content.style.height=50+"px";
+    content.style.background="pink";
+    content.style.left=30+"px";
+    content.style.top=30+"px";
+    content.style.borderRadius=50+"px";
+    content.style.position="absolute";
+
+    box.appendChild(content);
+}
+function move(){
+   // targetX = content.style.left=parseInt(content.style.left)+a*(x-parseInt(content.style.left))+"px";
+   // targetY = content.style.top=parseInt(content.style.top)+a*(y-parseInt(content.style.top))+"px";
+    console.log("targetX",x);
+    console.log("targetY",y); 
+   targetX;
+   targetY;
+    x=x+targetX;
+    content.style.left=x+"px";
+    y=y+targetY;
+    content.style.top=y+"px";
+}
+</script>
+</head>
+<body>
+    <div id="wrapper">
+    </br>
+        <input id="x" type="text" placeholder="이동할 x좌표" maxlength="4"/>
+        <input id="y" type="text" placeholder="이동할 y좌표" maxlength="4"/>
+            <button onClick="move()">실행</button>
+            <div id="box">
+            </div>
+    </div>
+
+</body>
+</html>

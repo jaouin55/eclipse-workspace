@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#wrapper{
+    width:1000px;
+    height:800px;
+    margin:auto;
+    opacity: 0.7;
+    position:relative;
+}
+</style>
+<script src="../js/lib.js"></script>
+<script>
+   var light;
+   var wrapper;
+   var targetX=0;
+   var targetY=0;
+   a=1;
+
+
+window.addEventListener("load" , function(){
+    wrapper = document.getElementById("wrapper");
+    createLight();
+    setInterval("move()" , 200);
+
+});
+
+function createLight(){
+    light = document.createElement("div");
+    light.style.width=50+"px";
+    light.style.height=50+"px";
+    light.style.backgroundColor="black";
+    light.style.borderRadius=40+"px";
+    light.style.position="absolute";
+    light.style.left=150+"px";
+    light.style.top=50+"px";
+
+    wrapper.appendChild(light);
+}
+
+function move(){
+    light.style.left=parseInt(light.style.left)+a*(targetX-parseInt(light.style.left))+"px";
+    light.style.top=parseInt(light.style.top)+a*(targetY-parseInt(light.style.top))+"px";
+    targetX=getRandom(800);
+    targetY=getRandom(800);
+}
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <img src="../img2/room.jpg">
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>/*
+
+var : 함수스코프
+*함수 내에서 선언된 변수는 안된다
+즉, 밖에서 사용가능하다.
+밖이란 중괄호를 벗어난 것을 의미한다.
+
+let,const : 블록스코프
+*모든 코드블록에서 선언된 변수는 코드블록 내 에서만 이해하며
+외부에서 접근 할 수 없다 ( 즉 , 코드블록 내에서 선언한 변수는 지역변수)
+
+함수, if문 , for문 , while문 , try/catch문
+
+===========================
+
+구조분해할당 (Destructuring assignment)
+: 구조 분해 할당 구문은 배열이나 객체의 속성을 분해해서
+그 값을 변수에 담을 수 있게 하는 표현식
+
+ex) 배열 구조 분해
+let [x , y] = [1 , 2];
+console.log(x); // 1
+console.log(y); // 2
+
+let users = ['Mike' , 'Tom' , 'Jane'];
+let [user1 , user2, user3] = users;
+console.log(user1); // 'Mike'
+console.log(user2); // 'Tom'
+console.log(user3); // 'Jane'
+
+let str = "Mike-Tom-Jane";
+let[user1,user2,user3] = str.split('_');
+                                                ["Mike","Tom","Jane"]
+console.log(user1); //'Mike'
+console.log(user2); //'Tom'
+console.log(user3); //'Jane'
+
+해당하는 값이 없을때는..?
+let [a,b,c] = [1,2];
+c=undefined
+
+=============================
+Square root 제곱근
+var numbers= [4 , 9 , 16 , 25 , 36];
+var result = numbers.map(Math.sqrt);
+console.log(result)  // 2 , 3 , 4 , 5 , 6
+
+var numbers = [1 , 2 , 3 , 4 , 5 ];
+var newNumbers = numbers.map(numbers => numbers * 2);
+console.log(newNumbers); //2 , 4 , 6 , 8 , 10
+
+var newNumbers = numbers.map(function(number){
+    return number *2;
+});
+=============================
+arr.includes() : 포함하는지 확인
+let arr= [1,2,3];
+arr.includes(2); //true
+arr.includes(8); //false
+
+arr.reverse() : 역순으로 재정렬
+
+
+
+
+*/
+</script>
+</head>
+<body>
+
+
+</body>
+</html>

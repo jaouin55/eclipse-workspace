@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0px;
+    background:wheat;
+}
+.wrapper{
+    width:600px;
+    height:600px;
+    margin:auto;
+    background:red;
+    border:1px solid red;
+    box-sizing: border-box;
+}
+#header{
+    width:100%;
+    height:100px;
+    background:blue;
+    text-align: center;
+}
+#nav{
+    width:100%;
+    height:100px;
+    background:chartreuse;
+    text-align: center;
+}
+#side_left{
+    width:150px;
+    height:300px;
+    background:cyan;
+    text-align: center;
+    position:relative;
+    line-height: 300px;
+}
+#contents{
+    width:300px;
+    height:300px;
+    background:cornsilk;
+    text-align: center;
+    position: absolute;
+    left:150px;
+    top:0px;
+    line-height: 300px;
+}
+#side_right{
+    width:150px;
+    height:300px;
+    background:darkmagenta;
+    text-align:center;
+    position: absolute;
+    left:448px;
+    top:0px;
+    line-height: 300px;
+}
+#footer{
+    width:100%;
+    height:100px;
+    background:dimgrey;
+    text-align: center;
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="header">머리</div>
+        <div id="nav">네비</div>
+        <div id="side_left">왼쪽컨텐츠
+            <div id="contents">메인컨텐츠</div>
+            <div id="side_right">오른쪽컨텐츠</div>
+        </div>
+        <div id="footer">하단</div>
+    </div> 
+</body>
+</html>

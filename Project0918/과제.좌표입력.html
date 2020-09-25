@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0px;
+}
+input{
+    width:200px;
+    height:30px;
+    margin:10px;
+}
+#wrapper{
+    width:100%;
+    height:800px;
+    border:1px solid black;
+}
+#box{
+    width:100%;
+    height:700px;
+    background:white;
+    position:relative;
+}
+</style>
+<script>
+    var x,y;
+    var wrapper;
+    var box;
+    var content;
+
+    window.addEventListener("load", function(){
+        wrapper = document.getElementById("wrapper");
+        box = document.getElementById("box");
+        x = document.querySelector("#x");
+        y = document.querySelector("#y");
+        createContent();
+        move();
+    });
+
+
+function createContent(){
+    content = document.createElement("div");
+    content.style.width=50+"px";
+    content.style.height=50+"px";
+    content.style.background="pink";
+    content.style.left=30+"px";
+    content.style.top=30+"px";
+    content.style.borderRadius=50+"px";
+    content.style.position="absolute";
+    box.appendChild(content);
+}
+function move(){
+    content.style.left=x.value+"px";
+    content.style.top=y.value+"px";
+}
+</script>
+</head>
+<body>
+    <div id="wrapper">
+    </br>
+        <input id="x" type="text" placeholder="이동할 x좌표" maxlength="4"/>
+        <input id="y" type="text" placeholder="이동할 y좌표" maxlength="4"/>
+            <button _onClick="move()">실행</button>
+            <div id="box">
+            </div>
+    </div>
+
+</body>
+</html>
+​

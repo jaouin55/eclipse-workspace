@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>베네치아 타자게임</title>
+<style>
+body{
+    margin:0px;
+}
+.wrapper{
+    width:1200px;
+    height:700px;
+    background:yellow;
+    margin:auto;
+    overflow: hidden;
+}
+.dash{
+    width:200px;
+    height:100%;
+    background:blue;
+    float:left;
+}
+#stage{
+    width:1000px;
+    height:100%;
+    background:silver;
+    float:left;
+    position: relative;
+}
+#stage span{
+    color:seagreen;
+    font-weight:bold;
+    font-size:17px;
+}
+</style>
+<script src="../js/lib.js"></script>
+<script>
+// 타자게임에 등장할 모든 단어
+//이차원배열인 이유 : stage가 여러판이기 때문
+var word=[
+["미국","중국","한국","일본","칠례","독일"],
+["러시아","이라크","캐나다","브라질","멕시코","필리핀"],
+["이탈리아","자메이카","아일랜드","스리랑카","네덜란드","싱가포르"],
+["짐바브웨","에콰도르","리히텐슈타인","아제르바이잔","우즈베키스탄","파푸아뉴기니"],
+["세인트크리스토퍼네비스","유고슬라비아헤르체고비나","콩고민주주의공화국","세인트빈센트그레나딘","보스니아헤르체고비나","트리니다드토바고"]
+];
+var stage;
+var level=0; //게이머의 현재레벨을 표현하는 변수
+var spanArray=[];//단어 10개의 span을 모아놓을 배열
+function init(){
+    stage=document.getElementById("stage");
+
+}
+//화면에 등장할 단어를 감쌀 태그 생성
+function createWord(){
+    //해당 stage에 등장할 단어만큼 생성(반복문)
+    for(var i=0; i<word[level].length; i++){
+    span = document.createElement("span");//inline이므로 너비,높이 가질수없음
+                                                                     //내부의 컨텐츠만큼만 감싼다.
+    span.innerHTML=word[level][i];
+    span.style.position="absolute";
+    span.style.left=(i*150)+"px";
+    span.style.top=150+getRandomBetween(-100,0)+"px"//단어가 y축 0위로 보내서 안보이게 하기
+    stage.appendChild(span);
+    spanArray.push(span);//span을 배열에 보관
+    }                                                                     
+} 
+//단어 내려오기 함수
+function move(){
+    spanArray[1].style.top=500+"px";
+}
+
+window.addEventListener("load",function(){
+    init();//초기화
+    createWord();//단어를 화면에 출력
+    move();
+});
+
+
+
+</script>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="dash"></div>
+        <div id="stage"></div>
+    </div>
+
+</body>
+</html>

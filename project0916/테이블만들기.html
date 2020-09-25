@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+function createTable(){
+    document.write("<table width='600px' border=\"2px\">");
+    
+    for(var i=99 ; i>=1 ; i--){//층수
+    document.write("<tr>");
+    for(var x=1 ; x<=5 ; x++){//호수
+    document.write("<td>"+i+"0"+x+"호</td>");
+    }
+    document.write("</tr>");
+    }
+
+    document.write("</table>");
+
+    document.write
+
+
+    // document.write("철수가 나에게 \"바보\"라고 놀렸다");
+    //특수기능을 보유한 쌍따음표가 아니라, 단순 문자로 입력하고 싶을때는
+   // 역슬래쉬(\)로 감싸줘야 한다! (이스케이프 문자)
+}
+
+
+
+</script>
+</head>
+
+<body onLoad="createTable()">
+    <!-- <table border="2px" width="600px">
+        <tr>
+            <td>301호</td>
+            <td>302호</td>
+            <td>303호</td>
+        </tr>
+        <tr>
+            <td>201호</td>
+            <td>202호</td>
+            <td>203호</td>
+        </tr>
+        <tr>
+            <td>101호</td>
+            <td>102호</td>
+            <td>103호</td>
+        </tr>
+    </table> -->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:auto;
+}
+.wrapper{
+    width:100%;
+    height:700px;
+    background:yellow;
+    position: relative;
+}
+div{
+    position: absolute;
+}
+#arrow1{
+    color:red;
+    left:0px;
+    top:150px;
+}
+#arrow2{
+    color:blue;
+    left:0px;
+    top:250px;
+}
+#arrow3{
+    color:green;
+    left:0px;
+    top:350px;
+}
+#arrow4{
+    color:purple;
+    left:0px;
+    top:450px;
+}
+#arrow5{
+    color:chocolate;
+    left:0px;
+    top:550px;
+}
+</style>
+<script src="../project0924/map.js"></script>
+<script>
+var div;
+var wrapper;
+var tempX;
+var a=0.1;
+var targetX;
+var arr=new Array[5]
+
+function init(){
+    wrapper = document.getElementById("wrapper");
+    div = document.getElementById("div");
+    wrapper.appendChild(div);
+    for(i=1; i<6; i++){
+        document.getElementById("arrow"+i);
+    }
+}
+function move(){
+    targetX = parseInt("arrow"+i.value);
+    console.log("x의 좌표는","arrow"+i+value);
+}
+function move2(){
+    tempX = parseInt(div.style.left)+a*(parseInt(targetX)-parseInt(div.style.left))
+    div.style.left = tempX + "px";
+}
+function auto(){
+    setInterval("move2()",100);
+}
+window.addEventListener("load", function(){
+    init();
+    move();
+    move2();
+    auto();
+});
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="arrow1">▶</div>
+        <div id="arrow2">▶</div>
+        <div id="arrow3">▶</div>
+        <div id="arrow4">▶</div>
+        <div id="arrow5">▶</div>
+    </div>
+</body>
+</html>
