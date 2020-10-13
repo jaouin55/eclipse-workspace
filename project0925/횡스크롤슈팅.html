@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0px;
+}
+#wrapper{
+    margin:auto;
+    width:100%;
+    height:600px;
+    background-image: url("../img/shooting/bg.jpg");
+    position: relative;
+}
+</style>
+<script src="Hero.js"></script>
+<script src="Enemy.js"></script>
+<script src="bullet.js"></script>
+<script>
+var wrapper;
+var hero;
+var bullet;
+var count=0;
+var bgX=0;
+var enemySrc=[
+    "../img/shooting/e1.png",
+    "../img/shooting/e2.png",
+    "../img/shooting/e3.png",
+    "../img/shooting/e4.png",
+    "../img/shooting/e5.png"
+]
+
+/*사용자마다 모니터 너비,높이가 픽셀에 따라 틀리므로 
+프로그래밍적으로 얻어온 결과에 대해서 위치를 설정해보자*/
+//screen.width , screen.height 을 이용
+
+function createEnemy(){
+    //container,width,height,x,y,src
+    for(var i=0; i<enemySrc.length; i++){
+        new Enemy(wrapper,80,80,screen.width-400,80+i*90,enemySrc[i]);
+    }
+}
+function createHero(){
+    //Hero.js로부터 주인공 인스턴스 생성
+    //container,x,y,width,height
+    hero = new Hero(wrapper,100,225,80,60);
+}
+
+//총알 생성
+function createBullet(){
+    //container,width,height,x,y,velX
+    bullet = new Bullet(wrapper,25,25,hero.x,hero.y);
+}
+
+//배경움직임 처리
+function moveBg(){
+    bgX = bgX -1; //음수: 좌측이동
+    wrapper.style.backgroundPosition=bgX+"px 0px"; //x축,y축
+}
+
+
+
+//게임에 등장하는 모든 요소를 움직여주는 심장박동
+function gameLoop(){  //모든 게임 객체 대상으로 추가적 함수 호출 시도할 엔진 루프
+    count++;
+    //console.log("count", count);
+    moveBg();
+    bullet.move();
+}
+
+function init(){
+    wrapper = document.getElementById("wrapper");
+    //interval에 지정한 시간은 게임의 실행속도를 좌우한다.(Frame Per Second) 1초마다 몇번 실행인지..
+    setInterval("gameLoop()",10); //게임루프 가동 시작
+    createHero();
+    createEnemy();
+    //키보드이벤트 구현
+    document.body.addEventListener("keydown",function(e){
+        //alert(e.keyCode)  space:32번
+        if(e.keyCode==32){
+            createBullet(); //총알 생성 함수 호출
+        }
+    });
+}
+
+window.addEventListener("load", function(){
+    init();
+});
+
+
+</script>
+</head>
+<body>
+    <div id="wrapper"></div>
+</body>
+</html>

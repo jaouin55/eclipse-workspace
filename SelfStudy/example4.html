@@ -69,13 +69,10 @@ function init(){
     hour.value=hh;
     min.value=mm;
     sec.value=ss;
-
 }
-
 window.addEventListener("load" , function(){
     init();
 });
-
 start.addEventListener("click", function(){
     auto();
  });
@@ -97,11 +94,9 @@ reset.addEventListener("click", function(){
         hour.value=hh;
         flag=true;
 });
-
 function auto(){
     st=setInterval("timer()",1000);
 }
-
 function timer(){
     if(flag){ 
         ss++;

@@ -10,7 +10,7 @@ var ball; //전역변수로 선언해야, 다른 함수영역에서 접근이 �
 var x=0; //ball의 x 좌표를 결정짓는 전역변수: 누적이 되어야 하므로 전역
 var y=0; //ball의 y 좌표를 결정짓는 전역변수: 누적이 되어야 하므로 전역
 var stepX=5;//초기의 x의 증가량
-var stepY=4; //초기의 y의 증가량
+var stepY=5; //초기의 y의 증가량
 var wrapper; //다른 함수에서 접근하기 위해서 전역변수로 선언
 var flag=true; //move 함수의 코드영역을 수행할지 여부를 결정짓는 전역변수
                     //전역 변수는 브라우저가 살아있는 동안, 계속 사용가능..
@@ -90,22 +90,21 @@ function move(){
         ball.style.top=y+"px";
 
         //왼쪽이나 오른쪽 벽에 닿으면
-        /*
+        
         if(x >= (parseInt(wrapper.style.width) - parseInt(ball.style.width)) ||  x<=0 ){
-            //x축으로 감소하면서 이동.. 
-            ball.style.border="1px solid red";    
+            //x축으로 감소하면서 이동..    
             stepX = -stepX; //부호반대로 전환
         }
-        */
+        
     //공이 바닥이나 천장에 닿으면..
-    /*
+    
     if(y>= (parseInt(wrapper.style.height) - parseInt(ball.style.height))  || y<=0){
         //y축으로의 증가분을 반대로 
         stepY = -stepY;
         }
-        */
-        stepX = (x >= (parseInt(wrapper.style.width) - parseInt(ball.style.width)) ||  x<=0)?-stepX : stepX;
-        stepY = (y>= (parseInt(wrapper.style.height) - parseInt(ball.style.height)) || y<=0)? -stepY: stepY; 
+        
+        // stepX = (x >= (parseInt(wrapper.style.width) - parseInt(ball.style.width)) ||  x<=0)?-stepX : stepX;
+        // stepY = (y>= (parseInt(wrapper.style.height) - parseInt(ball.style.height)) || y<=0)? -stepY: stepY; 
     }
 }
 

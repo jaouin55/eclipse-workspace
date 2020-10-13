@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrow</title>
+<script>
+var arr = new Array(); //다량의 화살을 배열로 선언
+
+class Arrow{
+// class= 사물을 생성하는 단위 (거푸집)
+// class로 선언되었으면 변수는 this로 변경 , function 삭제 , 
+//객체가 보유한 변수는 반드시 
+// constructor(){} 메서드 내에서만 정의 가능
+
+constructor(x,y,velX){ //변화를 줄 변수는 매개변수로 선언
+this.span;
+this.x=x;
+this.y=y;
+this.velX=velX; // 속도를 설정하는 변수
+this.createArrow();
+}
+
+createArrow(){
+    this.span = document.createElement("span");
+    this.span.innerText="▶";
+    this.span.style.position="absolute";
+    this.span.style.left= this.x+"px";
+    this.span.style.top=this.y+"px";
+    this.span.style.fontSize=40+"px";
+
+    document.body.appendChild( this.span);
+}
+
+tick(){
+    this.x+=this.velX; // 상수면 속도가 다 똑같기때문에 변수로 처리
+}
+
+//화살 움직이기
+render(){
+    this.span.style.left= this.x+"px";
+    }
+};
+
+function gameLoop(){ //누구를 제어할지 모르기때문에 이벤트쪽 함수에 변수선언
+   for(var i=0 ; i<arr.length; i++){
+   arr[i].tick();
+   arr[i].render();
+   // index [i] 값의 화살이 날라감
+   }
+}
+
+window.addEventListener("load",function(){
+    //화살 (인스턴스) 생성 new를사용
+    //new Arrow(x축,y축.vleX값);엉
+    // 여기서의 Arrow()란 constructor()를 호출하는 것이다.
+    //그러므로 constructor() 함수 안에 호출할 함수를 넣어야한다.
+
+    //소량의 화살 생성
+    //a1 = new Arrow(0,50,3);
+    //a2 = new Arrow(0,100,6);
+    //a3 = new Arrow(0,150,10);
+
+    //대량의 화살 생성(배열)
+    for(var i=0 ; i<100 ; i++){
+    arr.push(new Arrow(0,i*3,i+1));
+    }
+    setInterval("gameLoop()",10);  //FPS(프레임)
+});
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영화갤러리</title>
+<style>
+.wrapper{
+    width:1000px;
+    height:800px;
+    background:yellow;
+    margin:auto;
+}
+#head{
+    width:100%;
+    height:100px;
+    background:darkorange;
+    font-size:60px;
+    font-weight: bold;
+    text-align: center;
+}
+.content{
+    width:100%;
+    height:600px;
+    background:dodgerblue;
+    overflow: hidden;
+}
+#photo{
+    width:50%;
+    height:100%;
+    background:chartreuse;
+    float: left;
+}
+#desc{
+    width:50%;
+    height:100%;
+    background:crimson;
+    float: left;
+}
+#thumb{
+    width:100%;
+    height:100px;
+    background:darksalmon;
+    position: relative;
+    overflow: hidden;
+}
+</style>
+<script src="./data.json"></script>
+<script src="./Tuumbnail.js"></script>
+<script>
+var head,photo,desc,thumb;
+var thumbArray = new Array();
+
+function createThumb(){ //영화목록생성
+    //(container , width , height , bd , src)
+    for(var i=0; i<movie.marvel.length; i++){
+        var json=movie.marvel[i];
+    var obj = new Thumbnail(thumb , 100 , 90 , 5 , json.url , i*100);
+        thumbArray.push(obj);
+    }
+}
+
+function getDetail(url){ //영화에 대한 상세정보 처리
+    //1)선택한 썸네일을 확대하여 출력
+    photo.innerHTML="<img src=\""+url+"\" width=\"100%\" height=\"100%\" />";
+    //2)제목을 출력
+    head.innerText
+   //3)상세설명을 출력
+
+}
+function gameLoop(){
+    //console.log("gameLoop() called...");
+}
+
+function init(){
+    head = document.getElementById("head");
+    photo = document.getElementById("photo");
+    desc = document.getElementById("desc");
+    thumb = document.getElementById("thumb");
+}
+
+window.addEventListener("load",function(){
+    init();
+    createThumb();
+    setInterval("gameLoop()",10);
+});
+
+
+</script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="head">영화제목</div>
+        <div class="content">
+            <div id="photo"></div>
+            <div id="desc">부가설명</div>
+        </div>
+        <div id="thumb"></div>
+    </div>
+</body>
+</html>

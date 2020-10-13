@@ -4,30 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<script src="Arrow.js"></script>
 <script>
-var arrow;
-var stepX=10;
+/*클래스는 사물 자체가 아닌 틀에 불과하므로 , 반드시 쇳물을 부어서 객체를 만드는 과정이 필요*/
+/* 이때 , 클래스로 부터 생성되는 객체 한 단위를 가리켜 instance(인스턴스)라 한다!!*/
 
-function createArrow(){
-    arrow = document.createElement("span");
-    arrow.innerText="▶";
-    arrow.style.position="absolute";
-    arrow.style.left=0+"px";
-    arrow.style.top=100+"px";
-    arrow.style.color="red";
-    arrow.style.fontSize="30px";
-
-    document.body.appendChild(arrow);
-}
-/*동작 처리 함수*/
-function move(){
-    arrow.style.left=parseInt(arrow.style.left)+stepX+"px";
-}
+var arr=new Array(100);
 
 function init(){
-    createArrow();
-    setInterval("move()",10);
-}
+    for(var i=0 ; i<100 ; i++){
+    //인스턴스 생성하기
+    arrow = new Arrow(100 , i*70);//Arrow()는 클래스명..
+    //함수는 반드시 호출해야 동작하기 떄문에 호출해보자!
+   
+    arr[i]=arrow;
+    arrow.createArrow(100 , i*70);
+    }
+
+    setInterval(function(){
+        for(var i=0; i<arr.length; i++){
+             arr[i].move();
+            }
+        },10);
+    }
 
 window.addEventListener("load",function(){
     init();

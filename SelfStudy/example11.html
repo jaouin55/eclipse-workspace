@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+    margin:0;
+    padding:0;
+}
+#wrapper{
+    width:50rem;
+    height:50rem;
+    background:yellow;
+    border: 1px solid red;
+}
+.header{
+    width:100%;
+    height:10rem;
+    background:cornflowerblue;
+}
+.content{
+    width:100%;
+    height:30rem;
+    background:khaki;
+    position: relative;
+}
+.ball{
+    width:2.5rem;
+    height:2.5rem;
+    border-radius: 40px;
+    background:lawngreen;
+    position: absolute;
+}
+.bt{
+    width:5rem;
+    height:2.5rem;
+    border-radius: 10px;
+    color:red;
+    background:lightpink;
+}
+
+</style>
+<script>
+var wrapper;
+var content;
+var footer;
+var flag=true;
+var ball;
+var stepX=5;
+var stepY=5;
+
+function init(){
+    wrapper = document.getElementById("wrapper");
+    content = document.getElementById(".content");
+    footer =  document.createElement("div");
+    footer.style.width= 50 + "rem";
+    footer.style.height=10 + "rem";
+    footer.style.background="pink";
+    wrapper.appendChild(footer);
+}    
+function move(){
+    if(flag){
+        x += stepX;
+        y += stepY;
+        ball.style.left = x+"px";
+        ball.style.top = y+"px";
+
+    if(x>=(parseInt(content.style.width) - parseInt(ball.style.width)) || x<=0)
+    stepX = -stepX;
+    }
+    if(y>=(parseInt(content.style.top) - parseInt(ball.style.top)) || y<=0)
+    stepY = -stepY;
+    }
+funct
+window.addEventListener("load" , function(){
+     init();
+     move();
+});
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="header">
+            <button class="bt" onClick="move()">Start</button>
+        </div>
+        <div class="content">
+            <div class="ball"></div>
+        </div>
+    </div>
+</body>
+</html>
