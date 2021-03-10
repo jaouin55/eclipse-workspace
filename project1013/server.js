@@ -1,97 +1,201 @@
-/*http 웹서버 구축하기*/
-var http = require("http"); //필요한 모듈 가져오기
-var fs = require("fs");//파일을 읽거나, 쓸수 있는 모듈
-var url = require("url"); //url 정보를 해석해주는 모듈
+/*웹서버 구축하기*/
+//모듈이란? 기능을 모아놓은 자바스크립트 파일... js
+var http = require("http"); // http내부 모듈 가져오기 
+var url = require("url"); //url 분석 모듈 
+var fs = require("fs"); //file system 모듈(파일 읽기, 쓰기)
+var mysql = require("mysql"); // mysql 외부모듈 
+var ejs = require("ejs"); //node 서버에서만 실행가능한 문서
+                                    //html로 채워졌다고 하여,  html문서로 보면 안됨
 
-var mysql=require("mysql"); //외부모듈이기 때문에, npm install 설치해야 함
-var con; //접속 정보를 가진 객체(이 객체를 이용하여 쿼리문을 수행할 수 있다)
+//mysql 접속 문자열
+let conStr={
+    url:"localhost",
+    user:"root",
+    password:"1234",
+    database:"node"
+};
+var con; //mysql 접속 정보를 가진 객체, 이 객체로 sql 문을 수행할 수 있다
 
-//서버객체 생성 
-//request, response는 이미 nodejs자체적으로 존재하는 객체
+//서버 객체 생성 
 var server = http.createServer(function(request, response){
-    response.writeHead(200, {"Content-Type" : "text/html;charset=utf-8"});
-    
-    //클라이언트의 요청에 대한 응답 처리...(html문서를 주고받음)
 
-    //클라이언트의 요청 내용이 다양하므로, 각 요청을 처리할 조건문이 잇어야 한다..
-    //따라서 클라이언트가 원하는 것이 무엇인지부터 파악!!!
-    //console.log("클라이언트의 요청  url ", request.url);
-    //전체 url 중에서도 uri만을 추출해보자!!
-    //따라서  전체 .url을 해석해야 한다...해석은  parsing 한다고 한다 
+    //클라이언트가 원하는 요청을 처리하려면,  URL을 분석을 하여 URI추출해서 조건을 따져보자
+    var urlJson = url.parse(request.url, true);//분석 결과를 json으로 반환해줌 
+    console.log("URL 분석 결과는 ", urlJson);
 
-    //파싱시, true 옵션을주면, 파라미터의 매개변수를 접근할 수 있는  json을 추가해준다
-    var result=url.parse(request.url, true); //url 모듈을 이용하여 전체 주소를 대상으로 해석시작!!
-    //파싱한 결과인 result 를확인해보자!!
-    //console.log("파싱 결과 보고서 : ", result);
-    var paramObj = result.query; //파라미터를 담고 있는 json 객체반환
-    
-    //console.log("ID: ",paramObj.m_name ,"Pass:", paramObj.m_pass);
-
-    if(result.pathname=="/login"){
-        //console.log("mysql  연동하여 회원 존재여부 확인할께요");
-        
-        //mysql 연동하여 select ~~문
-        var sql="select * from hclass where id='"+paramObj.m_name+"' and pass='"+paramObj.m_pass+"'";
-        console.log("sql : ", sql);
-        
-        con.query(sql, function(error, record, fields){
+    if(urlJson.pathname=="/"){
+        fs.readFile("./index.html", "utf-8", function(error, data){
             if(error){
-                console.log("쿼리실행 실패", error);
+                console.log("index.html 읽기 실패", error);
             }else{
-                console.log("record : ", record);
-                
-                if(record.length>0){
-                    //레코드가 있을때는(배열의 길이가 1), 로그인 성공 메시지 
-                    //console.log("인증 성공");
-                    response.end("인증 성공");//클라이언트 브라우저에 출력!!
-                }else{
-                    //레코드가 없을때는(배열의 길이가 0 ), 로그인 실패 메시지 
-                    response.end("인증 실패");//클라이언트 브라우저에 출력!!
-                }
-
-            }
-        });//쿼리 실행
-
-
-
-    }else if(result.pathname=="/apple"){
-        console.log("사과를 드릴께요");
-        response.end("사과를 드릴께요");
-    }else if(result.pathname=="/loginForm"){
-        //우리가 제작한 loginForm.html은 로컬 파일로 열면 안되고, 
-        //모든 클라이언트가 인터넷 상의 주소로 접근하게 하기 위해서 
-        //서버가  html내용을 읽고, 그 내용을 클라이언트에게 응답정보로 보내야 한다!!
-        fs.readFile("./loginForm.html", "utf-8", function(error, data){
-            if(error){
-                console.log("읽기 실패입니다 ㅜㅜ", error);
-            }else{
-                //읽기 성공이므로, 클라이언트의 응답정보로 보내자!!
-                //HTTP 프로토콜로 데이터를 주고 받을때는, 이미 정해진 규약이 있으므로 눈에 보이지않는
-                //수많은 설정 정보값들을 서버와 클라이언트간 교환한다..
-                
+                //200이란???  처리성공 HTTP 상태코드 , 404 존재안하는 자원, 500 서버의 심각한 에러
+                response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
                 response.end(data);
             }
         });
+    }else if(urlJson.pathname=="/member/registForm"){
+        fs.readFile("./registForm.html", "utf-8", function(error, data){
+            if(error){
+                console.log("registForm.html읽기 실패", error);
+            }else{
+                //200이란???  처리성공 HTTP 상태코드 , 404 존재안하는 자원, 500 서버의 심각한 에러
+                response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+                response.end(data);
+            }
+        });
+
+    }else if(urlJson.pathname=="/member/loginForm"){
+        fs.readFile("./loginForm.html", "utf-8", function(error, data){
+            if(error){
+                console.log("loginForm.html 읽기 실패", error);
+            }else{
+                //200이란???  처리성공 HTTP 상태코드 , 404 존재안하는 자원, 500 서버의 심각한 에러
+                response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+                response.end(data);
+            }
+        });
+    }else if(urlJson.pathname=="/member/regist"){
+        //브라우저에서 전송된 파라미터를 먼저 받아야 한다..
+        //get방식의 파라미터 받기 
+        //회원정보는 member2 테이블에 넣고 
+        var sql="insert into member2(uid,password,uname,phone,email,receive,addr,memo)";
+        sql+=" values(?,?,?,?,?,?,?,?)"; //물음표는 바인드 변수를 의미..(나중에 강의)
+        var param=urlJson.query;
+        con.query(sql, [
+                param.uid, 
+                param.password, 
+                param.uname , 
+                param.phone, 
+                param.email, 
+                param.receive , 
+                param.addr, 
+                param.memo
+            ], function(error, result, fields){
+                if(error){
+                    console.log("회원정보 insert 실패", error);
+                }else{
+                    //방금 insert 된 회원의 pk를 조회해보자 
+                    sql="select last_insert_id() as member2_id";
+
+                    con.query(sql, function(error, record, fields){
+                        if(error){
+                            console.log("pk가져오기 실패", error);
+                        }else{
+                             console.log("record : ", record);   
+                             var member2_id=record[0].member2_id;
+                             //성공하면, 회원이 보유한 스킬 정보도 넣어주자 
+                             //스킬정보는 member_skill에 넣자(배열의 길이만큼..)
+                             for(var i=0;i<param.skill_id.length;i++){         
+                                 sql="insert into member_skill(member2_id, skill_id) values("+member2_id+" , "+param.skill_id[i]+")";              
+                                 console.log("스킬 등록 쿼리 : ", sql);
+                                 //쿼리 실행 
+                                 con.query(sql,function(err){
+                                    if(err){
+                                        alert("회원정보 등록 실패");    
+                                    }else{
+                                        response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+                                        response.end("회원정보 등록완료");
+                                    }   
+                                 });
+                             }
+                        }                                                    
+                    });//select 쿼리문 수행
+
+                } 
+        } );
+
+    }else if(urlJson.pathname=="/member/list"){
+        //회원목록 보여주기 
+        var sql="select * from member2";
+
+        con.query(sql, function(error, record, fields){
+            //console.log("회원목록 : ", record);
+            
+            //응답 정보를 테이블로 구성하자 
+            var tag="<table width='100%' border='1px'>";
+            tag += "<tr>";
+            tag += "<td>member2_id</td>";
+            tag += "<td>uid</td>";
+            tag += "<td>password</td>";
+            tag += "<td>uname</td>";
+            tag += "<td>phone</td>";
+            tag += "<td>email</td>";
+            tag += "<td>receive</td>";
+            tag += "<td>addr</td>";
+            tag += "<td>memo</td>";
+            tag += "</tr>";
+
+            for(var i=0;i<record.length;i++){
+                var member = record[i];//각각의 json을 끄집어 내자
+                tag += "<tr>";
+                tag += "<td><a href='/member/detail?member2_id="+member.member2_id+"'>"+member.member2_id+"</a></td>";
+                tag += "<td>"+member.uid+"</td>";
+                tag += "<td>"+member.password+"</td>";
+                tag += "<td>"+member.uname+"</td>";
+                tag += "<td>"+member.phone+"</td>";
+                tag += "<td>"+member.email+"</td>";
+                tag += "<td>"+member.receive+"</td>";
+                tag += "<td>"+member.addr+"</td>";
+                tag += "<td>"+member.memo+"</td>";
+                tag += "</tr>";
+            }
+            tag += "<tr>";
+            tag += "<td colspan='9'><a href='/'>메인으로</a></td>";
+            tag += "</tr>";
+            tag += "</table>";
+
+            response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+            response.end(tag);
+        }); 
+    }else if(urlJson.pathname=="/member/detail"){ //회원의 상세정보 요청
+        var member2_id=urlJson.query.member2_id;
+
+        //mysql 에서 데이터가져오기
+        var sql="select * from member2 where member2_id="+member2_id;
+
+        con.query(sql, function(error, record, fields){
+            if(error){
+                console.log("회원 1건 조회 실패", error);
+            }else{
+                //console.log("3번 회원의 정보 : ", record);
+                var obj = record[0];//0번째에 들어있는 json 추출 
+
+                fs.readFile("./detail.ejs", "utf-8", function(error, data){
+                    if(error){
+                        console.log("detail.ejs 읽기 실패", error);
+                    }else{
+                        response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+                        response.end(ejs.render(data, {
+                            member:obj //json 자체를 보내버림
+                        })); //그냥 보내지 말고, 서버에서 실행한 후 그 결과를 보내자
+                    }
+                });                
+            }
+        });     
+
+        
+    }else if(urlJson.pathname=="/fruit"){
+        var f1="Apple";
+        var f2="Orange";
+        fs.readFile("./test.ejs", "utf-8", function(error, data){
+            response.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+            //ejs를 그냥 파일로 문자취급해서 보내면 원본 코드까지 가버리기 때문에,,
+            //서버에서 실행을 한 후, 그결과를 보내야 한다..(jsp, php, asp 의 원리)
+            response.end(ejs.render(data,{
+                fruit:f1
+            }));
+        });
     }
-
-    
-
-    
 });
 
 //mysql 접속 
-function connectDB(){
-    con=mysql.createConnection({
-        url:"localhost", 
-        user:"root",
-        password:"1234",
-        database:"node"
-    });    
-
+function getConnection(){
+    con=mysql.createConnection(conStr); //json을 매개변수로 넣어주면 됨
 }
 
-//서버가동
-server.listen(8888, function(){
-    console.log("Server is running at 8888 port...");
-    connectDB(); //웹서버가 가동되면, mysql을 접속해 놓자
+//서버 가동 
+server.listen(7878, function(){
+    console.log("My Server is running at 7878 port...");
+    getConnection();
 });
+

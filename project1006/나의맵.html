@@ -32,23 +32,24 @@ function init(){
         position: pos ,
         animation:google.maps.Animation.BOUNCE ,
         icon:{
-            url:"../shooting/e1.png",
+            url:"../images/shooting/e1.png",
             scaledSize:new google.maps.Size(45,45)
         } 
     });
     marker.setMap(map); //마커를 적용할 맵 객체
 
-    //마커에 클릭이벤트 부여하기
-    google.maps.event.addListenner(marker,"click",function(){
+    //마커에 클릭이벤트 부여하기 
+    google.maps.event.addListener(marker, "click" , function(){
         map.setZoom(20);
-    //정보창 띄우기
-    var pop = new google.maps.InfoWindow({
-        content:"여기가 역삼 맛집이에요^^"
-    });
-    pop.open(map , marker);
-    });
 
+        //정보창 띄우기 
+        var pop = new google.maps.InfoWindow({
+            content:"여기가 역삼 맛집이에용^^"
+        });
+        pop.open(map, marker);
+    });
 }    
+
 </script>
 </head>
 <body>
